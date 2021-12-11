@@ -164,13 +164,13 @@ class User extends Authenticatable
      {
          return $this->favorites()->where("micropost_id", $micropostId)->exists();
      }
-     //public function feed_favorites()
-     //{
+     public function feed_favorites()
+     {
          // このユーザがお気に入り中の投稿のidを取得して配列にする
-         //$micropostIds = $this->favorites()->pluck("microposts.id")->toArray();
+         $micropostIds = $this->favorites()->pluck("microposts.id")->toArray();
          // このユーザのidもその配列に追加
-         //$micropostIds[] = $this->id;
+         $micropostIds[] = $this->id;
          // それらのユーザが所有する投稿に絞り込む
-         //return Micropost::whereIn("micropost_id", $micropostIds);
-     //}
+         return Micropost::whereIn("micropost_id", $micropostIds);
+     }
 }
