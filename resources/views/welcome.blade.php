@@ -2,7 +2,7 @@
 
 @section("content")
     @if (Auth::check())
-        <div class~"row">
+        <div class="row">
             <aside class="col-sm-4">
                 {{-- ユーザ情報 --}}
                 @include("users.card")

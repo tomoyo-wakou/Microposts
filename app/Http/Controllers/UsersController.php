@@ -83,4 +83,23 @@ class UsersController extends Controller
              "users" => $followers,
         ]);
      }
+    /**
+     * ユーザのお気に入り一覧を表示するアクション。
+     *
+     * @param  $id  ユーザのid
+     * @return \Illuminate\Http\Response
+     */
+     public function favorites($id)
+     {
+        $user = User::findOrFail($id);
+        $user->loadRelationshipCounts();
+        $favorite = $user->favorites()->paginate(10);
+        
+        return view("users.favorites", [
+            //users/card.blade.phpの$userへ
+            "user" => $user,
+            //users/favorite_users.blade.phpの$micropostsへ
+            "microposts" => $favorite,
+        ]);
+     }
 }
